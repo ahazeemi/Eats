@@ -31,7 +31,7 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     Context c;
 
 
-    public DishRecyclerViewAdapter(List<Dish> items, List<String> ids,Context c, OnListFragmentInteractionListener mListener) {
+    public DishRecyclerViewAdapter(List<Dish> items, Context c, OnListFragmentInteractionListener mListener) {
         mValues = items;
         this.mListener = mListener;
         this.c=c;
@@ -49,6 +49,7 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mName.setText(mValues.get(position).getName());
+        holder.mQuantity.setText(mValues.get(position).getName());
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

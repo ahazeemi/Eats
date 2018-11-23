@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "322751219360",
+    "firebase_url": "https://eats-24d11.firebaseio.com",
+    "project_id": "eats-24d11",
+    "storage_bucket": "eats-24d11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322751219360:android:a25fe03e1a838382",
+        "android_client_info": {
+          "package_name": "com.example.lenovo.eats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322751219360-0k1d56u05dogndg6denkbbsjqblv50sj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtI3Wu8HIiTK_xvNUPBpG2_mgRYi-W5Vo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

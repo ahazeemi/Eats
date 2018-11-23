@@ -17,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onComplaintClick(View view)
     {
-        startActivity(new Intent(this,OrderItems.class));
+        startActivity(new Intent(this,OrderDishes.class));
     }
 }

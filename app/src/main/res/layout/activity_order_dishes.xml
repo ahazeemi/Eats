@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lenovo.eats.Activities.OrderItems">
+    tools:context="com.example.lenovo.eats.Activities.OrderDishes">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/items_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_menu_item" />
+        tools:listitem="@layout/item_dish" />
 
 </android.support.constraint.ConstraintLayout>

@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.lenovo.eats.Activities.OrderItems"></activity>
+        <activity android:name="com.example.lenovo.eats.Activities.OrderDishes"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

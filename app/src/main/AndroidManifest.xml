@@ -24,7 +24,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.DishComplaintDetail"></activity>
+        <activity android:name=".Activities.DishComplaintDetail" />
+        <activity android:name=".Activities.ChefComplaiantDetail"></activity>
     </application>
 
 </manifest>

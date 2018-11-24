@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.lenovo.eats.ClassModel.MenuItem;
+import com.example.lenovo.eats.ClassModel.MenuItemView;
 import com.example.lenovo.eats.Interfaces.OnListFragmentInteractionListener;
 import com.example.lenovo.eats.R;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,13 +25,13 @@ import java.util.List;
 
 public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<MenuItem> mValues;
+    private final List<MenuItemView> mValues;
     private OnListFragmentInteractionListener mListener;
     private FirebaseStorage storage;
     private Context c;
 
 
-    public MenuItemRecyclerViewAdapter(List<MenuItem> items, Context c, OnListFragmentInteractionListener mListener) {
+    public MenuItemRecyclerViewAdapter(List<MenuItemView> items, Context c, OnListFragmentInteractionListener mListener) {
         mValues = items;
         this.mListener = mListener;
         this.c=c;
@@ -84,7 +83,7 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         final ImageView mPicture;
         final TextView mName;
         final TextView mQuantity;
-        MenuItem mItem;
+        MenuItemView mItem;
 
 
         public ViewHolder(View view) {

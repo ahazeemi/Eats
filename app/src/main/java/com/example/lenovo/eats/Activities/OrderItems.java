@@ -35,6 +35,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
     Integer itemsCount = 0;
     String orderId;
     String selectedMenuItemId;
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         recyclerView.setAdapter(adapter = new MenuItemRecyclerViewAdapter(menuItems,this,  mListener = this));
 
         orderId = getIntent().getStringExtra("orderId");
+        type=getIntent().getStringExtra("type");
 
         updateUI();
 
@@ -133,12 +135,25 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
 
     @Override
     public void onListFragmentInteraction(Bundle details, String action, boolean isFabClicked) {
-        Intent intent = new Intent(this, MenuItemComplaintDetail.class);
-        selectedMenuItemId = details.getString("menuItemId");
-        intent.putExtra("menuItemId", selectedMenuItemId);
-        intent.putExtra("menuItemName", details.getString("menuItemName"));
+        if(type.equals("customer")) {
+            Intent intent = new Intent(this, MenuItemComplaintDetail.class);
+            selectedMenuItemId = details.getString("menuItemId");
+            intent.putExtra("menuItemId", selectedMenuItemId);
+            intent.putExtra("menuItemName", details.getString("menuItemName"));
+            startActivityForResult(intent,1);
+        }
+        else
+        {
+            Intent intent = new Intent(this, ChefComplaiantDetail.class);
+            selectedMenuItemId = details.getString("menuItemId");
+            intent.putExtra("menuItemId", selectedMenuItemId);
+            intent.putExtra("menuItemName", details.getString("menuItemName"));
+            intent.putExtra("orderId",orderId);
+            startActivity(intent);
+        }
 
 
-        startActivityForResult(intent,1);
+
+
     }
 }

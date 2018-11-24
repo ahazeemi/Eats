@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#D3D3D3"
-    android:layout_marginBottom="5dp">
+    app:cardBackgroundColor="#FFFFFF"
+    android:layout_margin="5dp">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,6 +26,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ingredients_minus"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/ingredients_add"
             android:layout_width="41dp"
@@ -33,14 +45,14 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="@drawable/plus_circle"
+            android:background="@drawable/red_plus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/ingredients_quantity"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="30dp"
             android:text="0"
@@ -57,7 +69,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="@drawable/minus_circle"
+            android:background="@drawable/red_minus"
             app:layout_constraintEnd_toStartOf="@+id/ingredients_quantity"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>

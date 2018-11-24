@@ -85,7 +85,7 @@ public class ChefIngredientsAdapter extends RecyclerView.Adapter<ChefIngredients
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mValues.size();
     }
 
     public class IngredientsViewHolder extends RecyclerView.ViewHolder {

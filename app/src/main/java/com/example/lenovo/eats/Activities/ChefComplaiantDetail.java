@@ -40,8 +40,11 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dish_complaint_detail);
-        recyclerView = findViewById(R.id.items_list);
+        setContentView(R.layout.activity_chef_complaiant_detail);
+        metaIngredient=new HashMap<>();
+        ingredientsMap=new HashMap<>();
+        ingredients=new ArrayList<>();
+        recyclerView = findViewById(R.id.ingredientsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setAdapter(adapter = new ChefIngredientsAdapter(ingredients,this,this,ingredientsMap));
@@ -49,6 +52,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
         orderId = getIntent().getStringExtra("orderId");
         menuItemId=getIntent().getStringExtra("menuItemId");
         firebaseDatabase=FirebaseDatabase.getInstance();
+        UpdateUI();
     }
 
     void UpdateUI()
@@ -65,6 +69,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
                              Ingredient ingredient=dataSnapshot.getValue(Ingredient.class);
                              metaIngredient.put(dataSnapshot.getKey(),ingredient);
                              ingredients.add(new ChefIngredientsView(ingredient.getName(),dataSnapshot.getKey()));
+                             adapter.notifyDataSetChanged();
                          }
 
                          @Override
@@ -73,7 +78,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
                          }
                      });
                  }
-                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -122,6 +127,8 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
 
             ChefMiniOrder chefMiniOrder=new ChefMiniOrder(orderId,menuItemId,System.currentTimeMillis(),ingredientsMap);
             firebaseDatabase.getReference("ChefMiniOrder").push().setValue(chefMiniOrder);
+            //Something TODO with finsh result.
+            finish();
         }
     }
 

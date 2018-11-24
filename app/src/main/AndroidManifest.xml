@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.OrderDishes" />
+        <activity android:name=".Activities.OrderItems" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -26,6 +26,11 @@
 
         <activity android:name=".Activities.DishComplaintDetail" />
         <activity android:name=".Activities.ChefComplaiantDetail"></activity>
+        <activity android:name=".Activities.MenuItemComplaintDetail"
+            android:windowSoftInputMode="adjustPan"
+            >
+
+        </activity>
     </application>
 
 </manifest>

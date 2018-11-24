@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.lenovo.eats.ClassModel.Dish;
+import com.example.lenovo.eats.ClassModel.MenuItem;
 import com.example.lenovo.eats.Interfaces.OnListFragmentInteractionListener;
 import com.example.lenovo.eats.R;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,24 +24,25 @@ import java.util.List;
  * Created by lenovo on 11/23/2018.
  */
 
-public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerViewAdapter.ViewHolder> {
+public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Dish> mValues;
-    OnListFragmentInteractionListener mListener;
-    FirebaseStorage storage;
-    Context c;
+    private final List<MenuItem> mValues;
+    private OnListFragmentInteractionListener mListener;
+    private FirebaseStorage storage;
+    private Context c;
 
 
-    public DishRecyclerViewAdapter(List<Dish> items, Context c, OnListFragmentInteractionListener mListener) {
+    public MenuItemRecyclerViewAdapter(List<MenuItem> items, Context c, OnListFragmentInteractionListener mListener) {
         mValues = items;
         this.mListener = mListener;
         this.c=c;
+        storage = FirebaseStorage.getInstance();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_dish, parent, false);
+                .inflate(R.layout.item_menu_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,20 +51,21 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mName.setText(mValues.get(position).getName());
-        holder.mQuantity.setText(mValues.get(position).getName());
+        holder.mQuantity.setText(Integer.toString(mValues.get(position).getQuantityOrdered()));
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("dishId", mValues.get(position).getDishId());
-                mListener.onListFragmentInteraction(bundle, "dishDetail", true);
+                bundle.putString("menuItemId", mValues.get(position).getMenuItemId());
+                bundle.putString("menuItemName", mValues.get(position).getName());
+                mListener.onListFragmentInteraction(bundle, " menuItemDetail", true);
             }
         });
 
 
-        StorageReference ref = storage.getReference().child("DishesPic/" + mValues.get(position).getDishId() + ".jpg");
+        StorageReference ref = storage.getReference().child("MenuItemPic/" + mValues.get(position).getMenuItemId() + ".jpg");
         Glide.with(c.getApplicationContext()).load(ref).into(holder.mPicture);
 
 
@@ -77,17 +80,17 @@ public class DishRecyclerViewAdapter extends RecyclerView.Adapter<DishRecyclerVi
     public class ViewHolder extends RecyclerView.ViewHolder
 
     {
-        public final View mView;
-        public final ImageView mPicture;
-        public final TextView mName;
-        public final TextView mQuantity;
-        public Dish mItem;
+        final View mView;
+        final ImageView mPicture;
+        final TextView mName;
+        final TextView mQuantity;
+        MenuItem mItem;
 
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mPicture = view.findViewById(R.id.item_pic);
+            mPicture = view.findViewById(R.id.menu_item_pic);
             mName = view.findViewById(R.id.item_name);
             mQuantity = view.findViewById(R.id.item_quantity);
         }

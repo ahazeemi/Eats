@@ -1,25 +1,36 @@
 package com.example.lenovo.eats.ClassModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.firebase.database.Exclude;
 
 /**
- * Created by hamza on 24-Nov-18.
+ * Created by lenovo on 11/23/2018.
  */
+
 
 public class MenuItem {
 
-    String name;
-    HashMap<String,Integer> ingredients;
-    String type;
+    @Exclude
+    String menuItemId;
 
-    public MenuItem(String name, String type) {
-        this.name = name;
-        this.type = type;
-        ingredients=new HashMap<>();
+    @Exclude
+    Integer quantityOrdered;
+
+    String name;
+
+    public Integer getQuantityOrdered() {
+        return quantityOrdered;
     }
 
-    public MenuItem() {
+    public void setQuantityOrdered(Integer quantityOrdered) {
+        this.quantityOrdered = quantityOrdered;
+    }
+
+    public String getMenuItemId() {
+        return menuItemId;
+    }
+
+    public void setMenuItemId(String menuItemId) {
+        this.menuItemId = menuItemId;
     }
 
     public String getName() {
@@ -28,21 +39,5 @@ public class MenuItem {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public HashMap<String, Integer> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(HashMap<String, Integer> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

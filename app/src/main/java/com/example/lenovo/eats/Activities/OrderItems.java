@@ -1,17 +1,15 @@
 package com.example.lenovo.eats.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.lenovo.eats.Adapters.MenuItemRecyclerViewAdapter;
-import com.example.lenovo.eats.ClassModel.MenuItem;
+import com.example.lenovo.eats.ClassModel.MenuItemView;
 import com.example.lenovo.eats.ClassModel.MenuItemComplaint;
 import com.example.lenovo.eats.Interfaces.OnListFragmentInteractionListener;
 import com.example.lenovo.eats.R;
@@ -30,7 +28,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
     private RecyclerView recyclerView;
     private MenuItemRecyclerViewAdapter adapter;
     OnListFragmentInteractionListener mListener;
-    ArrayList<MenuItem> menuItems;
+    ArrayList<MenuItemView> menuItems;
     HashMap<String,MenuItemComplaint> menuItemsReordered;
     FirebaseDatabase firebaseDatabase;
     TextView itemsCountTextView;
@@ -99,7 +97,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         databaseReference.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                MenuItem menuItem = dataSnapshot.getValue(MenuItem.class);
+                MenuItemView menuItem = dataSnapshot.getValue(MenuItemView.class);
                 menuItem.setMenuItemId(dataSnapshot.getKey());
                 menuItem.setQuantityOrdered(quantity);
                 menuItems.add(menuItem);
@@ -130,6 +128,8 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             }
         }
     }
+
+
 
     @Override
     public void onListFragmentInteraction(Bundle details, String action, boolean isFabClicked) {

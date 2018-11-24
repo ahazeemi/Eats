@@ -7,7 +7,7 @@ import com.google.firebase.database.Exclude;
  */
 
 
-public class MenuItem {
+public class MenuItemView {
 
     @Exclude
     String menuItemId;

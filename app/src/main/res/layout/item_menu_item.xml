@@ -15,14 +15,14 @@
         android:padding="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/item_pic"
-            android:layout_width="73dp"
-            android:layout_height="60dp"
+            android:id="@+id/menu_item_pic"
+            android:layout_width="85dp"
+            android:layout_height="74dp"
             android:layout_centerVertical="true"
-            android:layout_marginTop="8dp"
             android:src="@drawable/chicken_karahi"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
@@ -33,16 +33,16 @@
             android:layout_width="184dp"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_toEndOf="@id/item_pic"
+            android:layout_toEndOf="@id/menu_item_pic"
             android:fontFamily="@font/montserrat"
             android:orientation="vertical"
             android:text="Chicken Karahi (Full)"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/item_pic"
+            app:layout_constraintStart_toEndOf="@+id/menu_item_pic"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -52,13 +52,16 @@
             android:layout_height="33dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/rounded_textview"
             android:fontFamily="@font/montserrat"
             android:gravity="center"
             android:text="2"
             android:textColor="@android:color/white"
             app:layout_constraintBaseline_toBaselineOf="@+id/item_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toEndOf="@+id/item_name" />
 
 

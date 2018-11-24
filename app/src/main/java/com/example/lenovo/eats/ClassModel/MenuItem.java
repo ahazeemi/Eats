@@ -6,31 +6,31 @@ import com.google.firebase.database.Exclude;
  * Created by lenovo on 11/23/2018.
  */
 
-public class Dish {
+
+public class MenuItem {
 
     @Exclude
-    String dishId;
+    String menuItemId;
 
     @Exclude
-    String quantityOrdered;
+    Integer quantityOrdered;
 
     String name;
 
-
-    public String getQuantityOrdered() {
+    public Integer getQuantityOrdered() {
         return quantityOrdered;
     }
 
-    public void setQuantityOrdered(String quantityOrdered) {
+    public void setQuantityOrdered(Integer quantityOrdered) {
         this.quantityOrdered = quantityOrdered;
     }
 
-    public String getDishId() {
-        return dishId;
+    public String getMenuItemId() {
+        return menuItemId;
     }
 
-    public void setDishId(String dishId) {
-        this.dishId = dishId;
+    public void setMenuItemId(String menuItemId) {
+        this.menuItemId = menuItemId;
     }
 
     public String getName() {

@@ -1,7 +1,9 @@
 package com.example.lenovo.eats.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,15 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         holder.mName.setText(mValues.get(position).getName());
         holder.mQuantity.setText(Integer.toString(mValues.get(position).getQuantityOrdered()));
 
+        if(holder.mItem.isAddedToOrder())
+        {
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#c9ff9e80"));
+        }
+        else
+        {
+            holder.cardView.setCardBackgroundColor(Color.WHITE);
+        }
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +70,7 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
                 Bundle bundle = new Bundle();
                 bundle.putString("menuItemId", mValues.get(position).getMenuItemId());
                 bundle.putString("menuItemName", mValues.get(position).getName());
+                bundle.putInt("menuItemPosition", position);
                 mListener.onListFragmentInteraction(bundle, " menuItemDetail", true);
             }
         });
@@ -83,8 +95,8 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         final ImageView mPicture;
         final TextView mName;
         final TextView mQuantity;
+        final CardView cardView;
         MenuItemView mItem;
-
 
         public ViewHolder(View view) {
             super(view);
@@ -92,6 +104,7 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
             mPicture = view.findViewById(R.id.menu_item_pic);
             mName = view.findViewById(R.id.item_name);
             mQuantity = view.findViewById(R.id.item_quantity);
+            cardView = view.findViewById(R.id.item_menu_item_parent);
         }
 
         @Override

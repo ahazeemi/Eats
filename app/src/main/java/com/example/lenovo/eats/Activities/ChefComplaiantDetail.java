@@ -94,8 +94,8 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
         if(ingredientsMap.size()>0)
         {
             for(Map.Entry<String,Integer> entry:ingredientsMap.entrySet()) {
-                int available = metaIngredient.get(entry.getKey()).getAvailableQuantity();
-                int reserve = metaIngredient.get(entry.getKey()).getReserveQuantity();
+                int available = metaIngredient.get(entry.getKey()).getAvailable_qty();
+                int reserve = metaIngredient.get(entry.getKey()).getReserved_qty();
                 if (available + reserve < entry.getValue()) {
                     DisplayAlert("Sorry the required amount of "+metaIngredient.get(entry.getKey()).getName()+"is not available","Required Amount not available");
                     return;
@@ -104,8 +104,8 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
 
             for(Map.Entry<String,Integer> entry:ingredientsMap.entrySet())
             {
-                int available=metaIngredient.get(entry.getKey()).getAvailableQuantity();
-                int reserve=metaIngredient.get(entry.getKey()).getReserveQuantity();
+                int available=metaIngredient.get(entry.getKey()).getAvailable_qty();
+                int reserve=metaIngredient.get(entry.getKey()).getReserved_qty();
                 if(available+reserve>entry.getValue())
                 {
                     if(entry.getValue()>available)

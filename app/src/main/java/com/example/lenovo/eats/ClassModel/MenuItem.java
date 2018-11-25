@@ -10,11 +10,31 @@ public class MenuItem {
     String name;
     HashMap<String,Integer> ingredients;
     String type;
+    Float sale_price;
+    String preparation_time;
 
-    public MenuItem(String name, String type) {
+    public Float getSale_price() {
+        return sale_price;
+    }
+
+    public void setSale_price(Float sale_price) {
+        this.sale_price = sale_price;
+    }
+
+    public String getPreparation_time() {
+        return preparation_time;
+    }
+
+    public void setPreparation_time(String preparation_time) {
+        this.preparation_time = preparation_time;
+    }
+
+    public MenuItem(String name, HashMap<String, Integer> ingredients, String type, Float sale_price, String preparation_time) {
         this.name = name;
+        this.ingredients = ingredients;
         this.type = type;
-        ingredients=new HashMap<>();
+        this.sale_price = sale_price;
+        this.preparation_time = preparation_time;
     }
 
     public MenuItem() {

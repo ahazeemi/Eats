@@ -6,9 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.lenovo.eats.Adapters.MenuItemRecyclerViewAdapter;
+import com.example.lenovo.eats.ClassModel.CustomerMiniOrder;
+import com.example.lenovo.eats.ClassModel.Ingredient;
+import com.example.lenovo.eats.ClassModel.MenuItem;
 import com.example.lenovo.eats.ClassModel.MenuItemView;
 import com.example.lenovo.eats.ClassModel.MenuItemComplaint;
 import com.example.lenovo.eats.Interfaces.OnListFragmentInteractionListener;
@@ -22,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class OrderItems extends AppCompatActivity implements OnListFragmentInteractionListener {
 
@@ -30,11 +36,14 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
     OnListFragmentInteractionListener mListener;
     ArrayList<MenuItemView> menuItems;
     HashMap<String,MenuItemComplaint> menuItemsReordered;
+    ProgressBar progressBar;
+
     FirebaseDatabase firebaseDatabase;
     TextView itemsCountTextView;
     Integer itemsCount = 0;
     String orderId;
     String selectedMenuItemId;
+    Integer selectedMenuItemPosition;
     String type;
 
     @Override
@@ -47,6 +56,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         setTitle("Mini Order");
 
         itemsCountTextView = findViewById(R.id.itemsAdded);
+        progressBar = ((ProgressBar)findViewById(R.id.progressBar));
         recyclerView = findViewById(R.id.items_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -68,7 +78,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 FetchMenuItem(dataSnapshot.getKey(),dataSnapshot.getValue(Integer.class));
-                FetchMenuItem(dataSnapshot.getKey(),dataSnapshot.getValue(Integer.class));
+                //FetchMenuItem(dataSnapshot.getKey(),dataSnapshot.getValue(Integer.class));
             }
 
             @Override
@@ -101,9 +111,10 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuItemView menuItem = dataSnapshot.getValue(MenuItemView.class);
                 menuItem.setMenuItemId(dataSnapshot.getKey());
-                menuItem.setQuantityOrdered(quantity);
+                //menuItem.setQuantityOrdered(quantity);
                 menuItems.add(menuItem);
                 adapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.INVISIBLE);
 
             }
 
@@ -114,12 +125,25 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         });
     }
 
+    public void onFabClick(View view)
+    {
+        progressBar.setVisibility(View.VISIBLE);
+
+        CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
+
+        for(Map.Entry<String,MenuItemComplaint> entry:menuItemsReordered.entrySet()) {
+
+        }
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                MenuItemComplaint menuItemComplaint = getIntent().getExtras().getParcelable("menuItem");
+                MenuItemComplaint menuItemComplaint = data.getExtras().getParcelable("menuItem");
+
                 if(!menuItemsReordered.containsKey(selectedMenuItemId))
                 {
                     //meaning it is a new menu item for reorder
@@ -127,6 +151,9 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
                     itemsCountTextView.setText(Integer.toString(itemsCount)+" Items Added");
                 }
                 menuItemsReordered.put(selectedMenuItemId,menuItemComplaint);
+                menuItems.get(selectedMenuItemPosition).setAddedToOrder(true);
+                menuItems.get(selectedMenuItemPosition).setQuantityOrdered(menuItemComplaint.getQuantity_reordered());
+                adapter.notifyDataSetChanged();
             }
         }
     }
@@ -138,8 +165,11 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         if(type.equals("customer")) {
             Intent intent = new Intent(this, MenuItemComplaintDetail.class);
             selectedMenuItemId = details.getString("menuItemId");
+            selectedMenuItemPosition = details.getInt("menuItemPosition");
             intent.putExtra("menuItemId", selectedMenuItemId);
             intent.putExtra("menuItemName", details.getString("menuItemName"));
+            intent.putExtra("menuItemObj",menuItemsReordered.get(selectedMenuItemId));
+
             startActivityForResult(intent,1);
         }
         else

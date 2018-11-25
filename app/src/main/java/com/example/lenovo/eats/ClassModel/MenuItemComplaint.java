@@ -11,25 +11,32 @@ import java.util.HashMap;
  * Created by lenovo on 11/24/2018.
  */
 
-
 public class MenuItemComplaint implements Parcelable {
 
     @Exclude
     HashMap<String,Boolean> causes;
 
+    @Exclude
+    HashMap<String,Integer> ingredients_count;
+
+    @Exclude
+    Float sale_price;
+
     String cause;
-    Integer quantityReordered;
-    String specialInstruction;
+    Integer quantity_reordered;
+    String special_instruction;
 
     public HashMap<String, Boolean> getCauses() {
         return causes;
     }
 
-    public MenuItemComplaint(HashMap<String, Boolean> causes, String cause, Integer quantityReordered, String specialInstruction) {
+    public MenuItemComplaint(HashMap<String, Boolean> causes, HashMap<String, Integer> ingredients_count, Float sale_price, String cause, Integer quantity_reordered, String special_instruction) {
         this.causes = causes;
+        this.ingredients_count = ingredients_count;
+        this.sale_price = sale_price;
         this.cause = cause;
-        this.quantityReordered = quantityReordered;
-        this.specialInstruction = specialInstruction;
+        this.quantity_reordered = quantity_reordered;
+        this.special_instruction = special_instruction;
     }
 
     public void setCauses(HashMap<String, Boolean> causes) {
@@ -44,27 +51,49 @@ public class MenuItemComplaint implements Parcelable {
         this.cause = cause;
     }
 
-    public Integer getQuantityReordered() {
-        return quantityReordered;
+    public Integer getQuantity_reordered() {
+        return quantity_reordered;
     }
 
-    public void setQuantityReordered(Integer quantityReordered) {
-        this.quantityReordered = quantityReordered;
+    public void setQuantity_reordered(Integer quantity_reordered) {
+        this.quantity_reordered = quantity_reordered;
     }
 
-    public String getSpecialInstruction() {
-        return specialInstruction;
+    public String getSpecial_instruction() {
+        return special_instruction;
     }
 
-    public void setSpecialInstruction(String specialInstruction) {
-        this.specialInstruction = specialInstruction;
+    public void setSpecial_instruction(String special_instruction) {
+        this.special_instruction = special_instruction;
+    }
+
+    public MenuItemComplaint() {
+    }
+
+    public HashMap<String, Integer> getIngredients_count() {
+
+        return ingredients_count;
+    }
+
+    public void setIngredients_count(HashMap<String, Integer> ingredients_count) {
+        this.ingredients_count = ingredients_count;
+    }
+
+    public Float getSale_price() {
+        return sale_price;
+    }
+
+    public void setSale_price(Float sale_price) {
+        this.sale_price = sale_price;
     }
 
     protected MenuItemComplaint(Parcel in) {
         causes = (HashMap) in.readValue(HashMap.class.getClassLoader());
+        ingredients_count = (HashMap) in.readValue(HashMap.class.getClassLoader());
+        sale_price = in.readByte() == 0x00 ? null : in.readFloat();
         cause = in.readString();
-        quantityReordered = in.readByte() == 0x00 ? null : in.readInt();
-        specialInstruction = in.readString();
+        quantity_reordered = in.readByte() == 0x00 ? null : in.readInt();
+        special_instruction = in.readString();
     }
 
     @Override
@@ -75,14 +104,21 @@ public class MenuItemComplaint implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(causes);
-        dest.writeString(cause);
-        if (quantityReordered == null) {
+        dest.writeValue(ingredients_count);
+        if (sale_price == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(quantityReordered);
+            dest.writeFloat(sale_price);
         }
-        dest.writeString(specialInstruction);
+        dest.writeString(cause);
+        if (quantity_reordered == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(quantity_reordered);
+        }
+        dest.writeString(special_instruction);
     }
 
     @SuppressWarnings("unused")

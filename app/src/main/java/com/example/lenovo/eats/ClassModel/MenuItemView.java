@@ -13,9 +13,20 @@ public class MenuItemView {
     String menuItemId;
 
     @Exclude
-    Integer quantityOrdered;
+    Integer quantityOrdered = 0;
+
+    @Exclude
+    Boolean addedToOrder = false;
 
     String name;
+
+    public Boolean isAddedToOrder() {
+        return addedToOrder;
+    }
+
+    public void setAddedToOrder(Boolean addedToOrder) {
+        this.addedToOrder = addedToOrder;
+    }
 
     public Integer getQuantityOrdered() {
         return quantityOrdered;

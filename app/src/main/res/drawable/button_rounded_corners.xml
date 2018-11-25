@@ -5,10 +5,10 @@
             <!--make a gradient background-->
             <gradient
                 android:type="linear"
-                android:startColor="@color/colorPrimary"
-                android:endColor="@color/colorPrimaryDark"
+                android:startColor="@color/colorPrimaryDark"
+                android:endColor="@color/colorAccent"
                 android:centerColor="@color/colorPrimary"
-                android:angle="180"
+                android:angle="0"
                 android:gradientRadius="90"
                 />
 

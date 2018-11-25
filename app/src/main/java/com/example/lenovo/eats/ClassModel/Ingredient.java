@@ -5,35 +5,38 @@ package com.example.lenovo.eats.ClassModel;
  */
 
 public class Ingredient {
-    int  availableQuantity;
-    int reserveQuantity;
+    int  available_qty;
+    int reserved_qty;
     String name;
-    String unit;
-
-    public Ingredient(int availableQuantity, int reserveQuantity, String name, String unit) {
-        this.availableQuantity = availableQuantity;
-        this.reserveQuantity = reserveQuantity;
-        this.name = name;
-        this.unit = unit;
-    }
+    Float ppp;
 
     public Ingredient() {
     }
 
-    public int getAvailableQuantity() {
-        return availableQuantity;
+    String qty_unit;
+
+    public int getAvailable_qty() {
+        return available_qty;
     }
 
-    public void setAvailableQuantity(int availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public Ingredient(int available_qty, int reserved_qty, String name, Float ppp, String qty_unit) {
+        this.available_qty = available_qty;
+        this.reserved_qty = reserved_qty;
+        this.name = name;
+        this.ppp = ppp;
+        this.qty_unit = qty_unit;
     }
 
-    public int getReserveQuantity() {
-        return reserveQuantity;
+    public void setAvailable_qty(int available_qty) {
+        this.available_qty = available_qty;
     }
 
-    public void setReserveQuantity(int reserveQuantity) {
-        this.reserveQuantity = reserveQuantity;
+    public int getReserved_qty() {
+        return reserved_qty;
+    }
+
+    public void setReserved_qty(int reserved_qty) {
+        this.reserved_qty = reserved_qty;
     }
 
     public String getName() {
@@ -44,11 +47,19 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getUnit() {
-        return unit;
+    public Float getPpp() {
+        return ppp;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setPpp(Float ppp) {
+        this.ppp = ppp;
+    }
+
+    public String getQty_unit() {
+        return qty_unit;
+    }
+
+    public void setQty_unit(String qty_unit) {
+        this.qty_unit = qty_unit;
     }
 }

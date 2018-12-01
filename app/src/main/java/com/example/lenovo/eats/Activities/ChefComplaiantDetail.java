@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.lenovo.eats.Adapters.ChefIngredientsAdapter;
 import com.example.lenovo.eats.ClassModel.ChefIngredientsView;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.utilities.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +37,8 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
     String menuItemId;
     FirebaseDatabase firebaseDatabase;
     HashMap<String,Ingredient>metaIngredient;
+    String time;
+    EditText timeInput;
 
 
     @Override
@@ -52,7 +56,9 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
         orderId = getIntent().getStringExtra("orderId");
         menuItemId=getIntent().getStringExtra("menuItemId");
         firebaseDatabase=FirebaseDatabase.getInstance();
+        timeInput=findViewById(R.id.TimeInput);
         UpdateUI();
+
     }
 
     void UpdateUI()
@@ -91,11 +97,19 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
 
     public void onDoneClick(View view)
     {
+        time=timeInput.getText().toString();
+        if(time.equals(""))
+        {
+            DisplayAlert("Please Enter the Time","Time not Entered");
+            return;
+        }
         if(ingredientsMap.size()>0)
         {
+            float priceSum=0;
             for(Map.Entry<String,Integer> entry:ingredientsMap.entrySet()) {
                 int available = metaIngredient.get(entry.getKey()).getAvailable_qty();
                 int reserve = metaIngredient.get(entry.getKey()).getReserved_qty();
+                priceSum+=(entry.getValue()*metaIngredient.get(entry.getKey()).getPpp());
                 if (available + reserve < entry.getValue()) {
                     DisplayAlert("Sorry the required amount of "+metaIngredient.get(entry.getKey()).getName()+"is not available","Required Amount not available");
                     return;
@@ -125,7 +139,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
             }
 
 
-            ChefMiniOrder chefMiniOrder=new ChefMiniOrder(orderId,menuItemId,System.currentTimeMillis(),ingredientsMap);
+            ChefMiniOrder chefMiniOrder=new ChefMiniOrder(orderId,menuItemId,System.currentTimeMillis(),ingredientsMap,priceSum,Integer.parseInt(time));
             firebaseDatabase.getReference("ChefMiniOrder").push().setValue(chefMiniOrder);
             //Something TODO with finsh result.
             finish();

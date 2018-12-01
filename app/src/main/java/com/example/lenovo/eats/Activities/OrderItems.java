@@ -131,37 +131,45 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
 
     public void onFabClick(View view)
     {
-        if(menuItemsReordered.size()==0)
+        if(type.equals("customer"))
         {
-            Snackbar.make(findViewById(R.id.constraintLayout),
-                    "Select at least one item", Snackbar.LENGTH_SHORT).show();
-            return;
-        }
-        progressBar.setVisibility(View.VISIBLE);
+            if(menuItemsReordered.size()==0)
+            {
+                Snackbar.make(findViewById(R.id.constraintLayout),
+                        "Select at least one item", Snackbar.LENGTH_SHORT).show();
+                return;
+            }
+            progressBar.setVisibility(View.VISIBLE);
 
-        for(Map.Entry<String,Ingredient> entry:ingredientsMap.entrySet())
+            for(Map.Entry<String,Ingredient> entry:ingredientsMap.entrySet())
+            {
+                firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("reserved_qty").setValue(entry.getValue().getReserved_qty());
+                firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("available_qty").setValue(entry.getValue().getAvailable_qty());
+            }
+
+            float price = 0;
+
+            for(Map.Entry<String,MenuItemComplaint> entry:menuItemsReordered.entrySet()) {
+                MenuItemComplaint menuItemComplaint = entry.getValue();
+                price+=menuItemComplaint.getSale_price()*menuItemComplaint.getQuantity_reordered();
+            }
+
+            CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
+            customerMiniOrder.setOrder_items(menuItemsReordered);
+            customerMiniOrder.setTimestamp(System.currentTimeMillis());
+            customerMiniOrder.setMain_order_id(orderId);
+            customerMiniOrder.setPrice(price);
+            firebaseDatabase.getReference("CustomerMiniOrder").push().setValue(customerMiniOrder);
+
+            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "Mini Order Placed", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else
         {
-            firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("reserved_qty").setValue(entry.getValue().getReserved_qty());
-            firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("available_qty").setValue(entry.getValue().getAvailable_qty());
+            finish();
         }
 
-        float price = 0;
-
-        for(Map.Entry<String,MenuItemComplaint> entry:menuItemsReordered.entrySet()) {
-            MenuItemComplaint menuItemComplaint = entry.getValue();
-            price+=menuItemComplaint.getSale_price()*menuItemComplaint.getQuantity_reordered();
-        }
-
-        CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
-        customerMiniOrder.setOrder_items(menuItemsReordered);
-        customerMiniOrder.setTimestamp(System.currentTimeMillis());
-        customerMiniOrder.setMain_order_id(orderId);
-        customerMiniOrder.setPrice(price);
-        firebaseDatabase.getReference("CustomerMiniOrder").push().setValue(customerMiniOrder);
-
-        progressBar.setVisibility(View.INVISIBLE);
-        Toast.makeText(this, "Mini Order Placed", Toast.LENGTH_SHORT).show();
-        finish();
 
     }
 
@@ -188,15 +196,16 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         }
         else if(requestCode==2)
         {
-            String key=data.getStringExtra("menuItemId");
-            MenuItemView temp=new MenuItemView();
-            temp.setMenuItemId(key);
-            int index=menuItems.indexOf(temp);
-            menuItems.remove(index);
-            if(menuItems.size()==0)
-            {
-                Toast.makeText(this, "All Items Reordered", Toast.LENGTH_SHORT).show();
-                finish();
+            if(resultCode == RESULT_OK) {
+                String key = data.getStringExtra("menuItemId");
+                MenuItemView temp = new MenuItemView();
+                temp.setMenuItemId(key);
+                int index = menuItems.indexOf(temp);
+                menuItems.remove(index);
+                if (menuItems.size() == 0) {
+                    Toast.makeText(this, "All Items Reordered", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         }
     }

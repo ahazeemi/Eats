@@ -26,6 +26,7 @@ public class MenuItemComplaint implements Parcelable {
     Integer quantity_reordered;
     String special_instruction;
 
+    @Exclude
     public HashMap<String, Boolean> getCauses() {
         return causes;
     }
@@ -39,6 +40,8 @@ public class MenuItemComplaint implements Parcelable {
         this.special_instruction = special_instruction;
     }
 
+
+    @Exclude
     public void setCauses(HashMap<String, Boolean> causes) {
         this.causes = causes;
     }
@@ -70,19 +73,23 @@ public class MenuItemComplaint implements Parcelable {
     public MenuItemComplaint() {
     }
 
+    @Exclude
     public HashMap<String, Integer> getIngredients_count() {
 
         return ingredients_count;
     }
 
+    @Exclude
     public void setIngredients_count(HashMap<String, Integer> ingredients_count) {
         this.ingredients_count = ingredients_count;
     }
 
+    @Exclude
     public Float getSale_price() {
         return sale_price;
     }
 
+    @Exclude
     public void setSale_price(Float sale_price) {
         this.sale_price = sale_price;
     }

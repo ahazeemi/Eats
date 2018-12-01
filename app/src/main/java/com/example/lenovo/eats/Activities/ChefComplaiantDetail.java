@@ -70,7 +70,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
                  MenuItem menuItem= dataSnapshot.getValue(MenuItem.class);
                  for(String key:menuItem.getIngredients().keySet())
                  {
-                     firebaseDatabase.getReference("Ingredient").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                     firebaseDatabase.getReference("Inventory").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                          @Override
                          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                              Ingredient ingredient=dataSnapshot.getValue(Ingredient.class);
@@ -133,8 +133,8 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
                         available=available-entry.getValue();
                     }
 
-                    firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("reserve_qty").setValue(reserve);
-                    firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("available_qty").setValue(available);
+                    firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("reserve_qty").setValue(reserve);
+                    firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("available_qty").setValue(available);
 
                 }
             }
@@ -144,7 +144,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
             firebaseDatabase.getReference("ChefMiniOrder").push().setValue(chefMiniOrder);
             Intent intent=new Intent();
             intent.putExtra("menuItemId",menuItemId);
-            setResult(2,intent);
+            setResult(RESULT_OK,intent);
             finish();
         }
     }

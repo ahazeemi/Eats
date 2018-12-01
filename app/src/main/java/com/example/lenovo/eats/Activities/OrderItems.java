@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenovo.eats.Adapters.MenuItemRecyclerViewAdapter;
 import com.example.lenovo.eats.ClassModel.CustomerMiniOrder;
@@ -128,11 +129,16 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
     public void onFabClick(View view)
     {
         progressBar.setVisibility(View.VISIBLE);
+        if(type.equals("customer")) {
 
-        CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
+            CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
 
-        for(Map.Entry<String,MenuItemComplaint> entry:menuItemsReordered.entrySet()) {
+            for (Map.Entry<String, MenuItemComplaint> entry : menuItemsReordered.entrySet()) {
 
+            }
+        }
+        else {
+            finish();
         }
 
     }
@@ -156,6 +162,19 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
                 adapter.notifyDataSetChanged();
             }
         }
+        else if(requestCode==2)
+        {
+            String key=data.getStringExtra("menuItemId");
+            MenuItemView temp=new MenuItemView();
+            temp.setMenuItemId(key);
+            int index=menuItems.indexOf(temp);
+            menuItems.remove(index);
+            if(menuItems.size()==0)
+            {
+                Toast.makeText(this, "All Items Reordered", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
     }
 
 
@@ -169,8 +188,6 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             intent.putExtra("menuItemId", selectedMenuItemId);
             intent.putExtra("menuItemName", details.getString("menuItemName"));
             intent.putExtra("menuItemObj",menuItemsReordered.get(selectedMenuItemId));
-
-            startActivityForResult(intent,1);
         }
         else
         {
@@ -179,11 +196,8 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             intent.putExtra("menuItemId", selectedMenuItemId);
             intent.putExtra("menuItemName", details.getString("menuItemName"));
             intent.putExtra("orderId",orderId);
-            startActivity(intent);
+            startActivityForResult(intent,2);
         }
-
-
-
 
     }
 }

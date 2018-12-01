@@ -1,10 +1,13 @@
 package com.example.lenovo.eats.ClassModel;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by hamza on 24-Nov-18.
  */
 
-public class Ingredient {
+public class Ingredient implements Parcelable {
     int  available_qty;
     int reserved_qty;
     String name;
@@ -62,4 +65,44 @@ public class Ingredient {
     public void setQty_unit(String qty_unit) {
         this.qty_unit = qty_unit;
     }
+
+    protected Ingredient(Parcel in) {
+        available_qty = in.readInt();
+        reserved_qty = in.readInt();
+        name = in.readString();
+        ppp = in.readByte() == 0x00 ? null : in.readFloat();
+        qty_unit = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(available_qty);
+        dest.writeInt(reserved_qty);
+        dest.writeString(name);
+        if (ppp == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeFloat(ppp);
+        }
+        dest.writeString(qty_unit);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+        @Override
+        public Ingredient createFromParcel(Parcel in) {
+            return new Ingredient(in);
+        }
+
+        @Override
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
+        }
+    };
 }

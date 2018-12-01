@@ -120,7 +120,7 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
             {
                 int available=metaIngredient.get(entry.getKey()).getAvailable_qty();
                 int reserve=metaIngredient.get(entry.getKey()).getReserved_qty();
-                if(available+reserve>entry.getValue())
+                if(available+reserve>=entry.getValue())
                 {
                     if(entry.getValue()>available)
                     {

@@ -2,6 +2,7 @@ package com.example.lenovo.eats.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenovo.eats.Adapters.MenuItemRecyclerViewAdapter;
 import com.example.lenovo.eats.ClassModel.CustomerMiniOrder;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -36,6 +39,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
     OnListFragmentInteractionListener mListener;
     ArrayList<MenuItemView> menuItems;
     HashMap<String,MenuItemComplaint> menuItemsReordered;
+    HashMap <String,Ingredient> ingredientsMap;
     ProgressBar progressBar;
 
     FirebaseDatabase firebaseDatabase;
@@ -52,6 +56,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         setContentView(R.layout.activity_order_items);
         menuItems = new ArrayList<>();
         menuItemsReordered = new HashMap<>();
+        ingredientsMap = new HashMap<>();
         firebaseDatabase=FirebaseDatabase.getInstance();
         setTitle("Mini Order");
 
@@ -127,13 +132,37 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
 
     public void onFabClick(View view)
     {
+        if(menuItemsReordered.size()==0)
+        {
+            Snackbar.make(findViewById(R.id.constraintLayout),
+                    "Select at least one item", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
         progressBar.setVisibility(View.VISIBLE);
+        
+        for(Map.Entry<String,Ingredient> entry:ingredientsMap.entrySet())
+        {
+            firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("reserved_qty").setValue(entry.getValue().getReserved_qty());
+            firebaseDatabase.getReference("Inventory").child(entry.getKey()).child("available_qty").setValue(entry.getValue().getAvailable_qty());
+        }
 
-        CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
+        float price = 0;
 
         for(Map.Entry<String,MenuItemComplaint> entry:menuItemsReordered.entrySet()) {
-
+            MenuItemComplaint menuItemComplaint = entry.getValue();
+            price+=menuItemComplaint.getSale_price()*menuItemComplaint.getQuantity_reordered();
         }
+
+        CustomerMiniOrder customerMiniOrder = new CustomerMiniOrder();
+        customerMiniOrder.setOrder_items(menuItemsReordered);
+        customerMiniOrder.setTimestamp(System.currentTimeMillis());
+        customerMiniOrder.setMain_order_id(orderId);
+        customerMiniOrder.setPrice(price);
+        firebaseDatabase.getReference("CustomerMiniOrder").push().setValue(customerMiniOrder);
+
+        progressBar.setVisibility(View.INVISIBLE);
+        Toast.makeText(this, "Mini Order Placed", Toast.LENGTH_SHORT).show();
+        finish();
 
     }
 
@@ -153,6 +182,8 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
                 menuItemsReordered.put(selectedMenuItemId,menuItemComplaint);
                 menuItems.get(selectedMenuItemPosition).setAddedToOrder(true);
                 menuItems.get(selectedMenuItemPosition).setQuantityOrdered(menuItemComplaint.getQuantity_reordered());
+                HashMap<String, Ingredient> temp = (HashMap<String, Ingredient>)data.getSerializableExtra("ingredientsMap");
+                ingredientsMap.putAll(temp);
                 adapter.notifyDataSetChanged();
             }
         }
@@ -169,6 +200,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             intent.putExtra("menuItemId", selectedMenuItemId);
             intent.putExtra("menuItemName", details.getString("menuItemName"));
             intent.putExtra("menuItemObj",menuItemsReordered.get(selectedMenuItemId));
+            intent.putExtra("ingredientsMap",ingredientsMap);
 
             startActivityForResult(intent,1);
         }

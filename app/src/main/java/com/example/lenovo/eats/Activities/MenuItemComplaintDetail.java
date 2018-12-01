@@ -3,6 +3,7 @@ package com.example.lenovo.eats.Activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -45,6 +46,7 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
     HashMap <String,Ingredient> ingredientsMap;
     HashMap<String,Integer> ingredientsOfMenuItem;
     Float salePrice;
+    boolean quantityDisabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
 
         ingredientsMap = new HashMap<>();
+        ingredientsMap = (HashMap<String, Ingredient>)getIntent().getSerializableExtra("ingredientsMap");
         firebaseDatabase=FirebaseDatabase.getInstance();
         menuItemId = getIntent().getStringExtra("menuItemId");
 
@@ -77,6 +80,8 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
 
             menuItemQuantity.setText(Integer.toString(menuItem.getQuantity_reordered()));
             complaintDetail.setText(menuItem.getSpecial_instruction());
+            disableEditText(menuItemQuantity);
+            quantityDisabled = true;
         }
 
         StorageReference ref = storage.getReference().child("MenuItemPic/" + menuItemId + ".jpg");
@@ -84,6 +89,14 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
 
         fetchMenuItemDetails(menuItemId);
 
+    }
+
+    private void disableEditText(EditText editText) {
+        editText.setFocusable(false);
+        //editText.setEnabled(false);
+        editText.setCursorVisible(false);
+        editText.setKeyListener(null);
+        editText.setBackgroundColor(Color.TRANSPARENT);
     }
 
     void fetchMenuItemDetails(String menuItemId)
@@ -96,6 +109,9 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
                 ingredientsOfMenuItem = menuItem.getIngredients();
                 for(final String key: ingredientsOfMenuItem.keySet())
                 {
+                    if(ingredientsMap.containsKey(key))
+                        continue;
+
                     firebaseDatabase.getReference("Inventory").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,23 +166,50 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
             return;
         }
 
-
-
-        String cause = "";
-        String specialInstruction = complaintDetail.getText().toString();
         Integer quantity = Integer.parseInt(itemQuantity);
-
-        if(ingredientsMap.size()>0)
+        if(!quantityDisabled)
         {
-            for(Map.Entry<String,Integer> entry:ingredientsOfMenuItem.entrySet()) {
-                int available = ingredientsMap.get(entry.getKey()).getAvailable_qty();
-                int reserve = ingredientsMap.get(entry.getKey()).getReserved_qty();
-                if (available + reserve < (entry.getValue()*quantity)) {
-                    DisplayAlert("The required amount of "+ ingredientsMap.get(entry.getKey()).getName()+" is not available in the inventory.","Insufficient Quantity");
-                    return;
+            if(ingredientsMap.size()>0)
+            {
+                for(Map.Entry<String,Integer> entry:ingredientsOfMenuItem.entrySet()) {
+                    int available = ingredientsMap.get(entry.getKey()).getAvailable_qty();
+                    int reserve = ingredientsMap.get(entry.getKey()).getReserved_qty();
+                    if (available + reserve < (entry.getValue()*quantity)) {
+                        DisplayAlert("The required amount of "+ ingredientsMap.get(entry.getKey()).getName()+" is not available in the inventory.","Insufficient Quantity");
+                        return;
+                    }
+                }
+
+                for(Map.Entry<String,Integer> entry:ingredientsOfMenuItem.entrySet())
+                {
+                    int available = ingredientsMap.get(entry.getKey()).getAvailable_qty();
+                    int reserve = ingredientsMap.get(entry.getKey()).getReserved_qty();
+                    int requiredQuantity = entry.getValue()*quantity;
+                    if(available+reserve>=requiredQuantity)
+                    {
+                        if(requiredQuantity>available)
+                        {
+                            reserve=reserve-(requiredQuantity-available);
+                            available=0;
+                        }
+                        else
+                        {
+                            available=available-requiredQuantity;
+                        }
+
+                        ingredientsMap.get(entry.getKey()).setAvailable_qty(available);
+                        ingredientsMap.get(entry.getKey()).setReserved_qty(reserve);
+
+                        //firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("reserved_qty").setValue(reserve);
+                        //firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("available_qty").setValue(available);
+
+                    }
                 }
             }
         }
+
+        String cause = "";
+        String specialInstruction = complaintDetail.getText().toString();
 
         List<CheckBox> items = new ArrayList<CheckBox>();
         items.add((CheckBox)findViewById(R.id.taste));
@@ -188,6 +231,7 @@ public class MenuItemComplaintDetail extends AppCompatActivity {
         MenuItemComplaint complaint = new MenuItemComplaint(causes,ingredientsOfMenuItem,salePrice,cause,quantity,specialInstruction);
         Intent intent = new Intent();
         intent.putExtra("menuItem",complaint);
+        intent.putExtra("ingredientsMap",ingredientsMap);
         setResult(RESULT_OK,intent);
 
         finish();

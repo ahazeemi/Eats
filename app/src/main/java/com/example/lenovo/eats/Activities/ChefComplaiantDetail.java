@@ -2,6 +2,7 @@ package com.example.lenovo.eats.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -132,8 +133,8 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
                         available=available-entry.getValue();
                     }
 
-                    firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("reserveQuantity").setValue(reserve);
-                    firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("availableQuantity").setValue(available);
+                    firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("reserve_qty").setValue(reserve);
+                    firebaseDatabase.getReference("Ingredient").child(entry.getKey()).child("available_qty").setValue(available);
 
                 }
             }
@@ -141,7 +142,9 @@ public class ChefComplaiantDetail extends AppCompatActivity implements OnListFra
 
             ChefMiniOrder chefMiniOrder=new ChefMiniOrder(orderId,menuItemId,System.currentTimeMillis(),ingredientsMap,priceSum,Integer.parseInt(time));
             firebaseDatabase.getReference("ChefMiniOrder").push().setValue(chefMiniOrder);
-            //Something TODO with finsh result.
+            Intent intent=new Intent();
+            intent.putExtra("menuItemId",menuItemId);
+            setResult(2,intent);
             finish();
         }
     }

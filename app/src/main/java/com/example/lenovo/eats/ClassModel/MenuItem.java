@@ -63,4 +63,10 @@ public class MenuItem {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        return super.equals(obj);
+    }
 }

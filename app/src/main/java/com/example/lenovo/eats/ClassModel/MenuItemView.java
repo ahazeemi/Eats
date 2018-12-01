@@ -51,4 +51,16 @@ public class MenuItemView {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof MenuItemView)
+        {
+
+           if(menuItemId.equals(((MenuItemView)obj).getMenuItemId()))
+               return true;
+        }
+        return false;
+
+    }
 }

@@ -1,5 +1,10 @@
 package com.example.lenovo.eats.ClassModel;
 
+/**
+ * Created by Sheri on 05-Dec-18.
+ */
+
+
 public class OrderMenuItem {
     Float calculated_price;
     Integer quantity;

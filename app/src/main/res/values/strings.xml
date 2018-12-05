@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Eats</string>
+    <string name="merge">Merge</string>
+    <string name="checkout">checkout</string>
+    <string name="order">Order #</string>
+    <string name="split_bill">Split Bill</string>
+    <string name="Num">#</string>
+    <string name="dish_name">Dish name</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="email">Email:</string>
+    <string name="email_bill">Email Bill</string>
+    <string name="abc_test_com">abc@test.com</string>
+    <string name="grand_total">Grand Total:</string>
+    <string name="gst_17">GST 17%:</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="new_biill">NEW BIILL</string>
+    <string name="cancel">cancel</string>
+    <string name="done">done</string>
 </resources>

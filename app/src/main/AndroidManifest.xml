@@ -24,7 +24,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.DishComplaintDetail" />
+        <activity android:name=".Activities.Bill_FeedbackActivity"></activity>
+        <activity android:name=".Activities.Bill_ShowOrderActivity"/>
+        <activity android:name=".Activities.Bill_SplitBillActivity"/>
+
         <activity android:name=".Activities.ChefComplaiantDetail"></activity>
         <activity android:name=".Activities.MenuItemComplaintDetail"
             android:windowSoftInputMode="adjustPan"

@@ -174,7 +174,7 @@ public class Bill_ShowOrderActivity extends AppCompatActivity {
     public void checkoutDialogue()
     {
         final Dialog checkoutDialog = new Dialog(this);
-        checkoutDialog.setContentView(R.layout.bill_email_dialogue);
+        checkoutDialog.setContentView(R.layout.email_dialogue);
         checkoutDialog.show();
 
         Button skipBtn = checkoutDialog.findViewById(R.id.skipBtn);

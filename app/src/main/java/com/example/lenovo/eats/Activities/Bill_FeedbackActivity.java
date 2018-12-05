@@ -20,7 +20,7 @@ public class Bill_FeedbackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
-        feedbackRef = FirebaseDatabase.getInstance().getReference().child("Feedbacks");
+        feedbackRef = FirebaseDatabase.getInstance().getReference().child("Feedback");
 
         Button submit =  findViewById(R.id.submitFeedbackBtn);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -29,14 +29,14 @@ public class Bill_FeedbackActivity extends AppCompatActivity {
                 EditText name = findViewById(R.id.nameField);
                 EditText phone = findViewById(R.id.phoneField);
                 EditText comments = findViewById(R.id.commentsField);
-                RatingBar ratings = findViewById(R.id.ratingBar);
+                RatingBar ratings = findViewById(R.id.rating_bar);
 
                 String nameString, phoneString, commentsString;
                 nameString = name.getText().toString();
                 phoneString = phone.getText().toString();
                 commentsString = comments.getText().toString();
-                int rating = ratings.getNumStars();
-                Bill_Feedback feedback = new Bill_Feedback(nameString, phoneString, commentsString, rating);
+
+                Bill_Feedback feedback = new Bill_Feedback(nameString, phoneString, commentsString, (int) ratings.getRating());
 
                 //store feedback to db
                 feedbackRef.push().setValue(feedback);

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lenovo.eats.Activities.PiedPiperAddTabletActivity">
+
+    <TextView
+        android:id="@+id/et_heading"
+        android:layout_width="319dp"
+        android:layout_height="73dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Add Tablet"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_tablet_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Table no"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/et_heading"
+        app:layout_constraintStart_toStartOf="@+id/et_heading"
+        app:layout_constraintTop_toBottomOf="@+id/et_heading" />
+
+    <Spinner
+        android:id="@+id/sp_table_no"
+        android:layout_width="236dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_tablet_no"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/et_tablet_no"
+        app:layout_constraintTop_toBottomOf="@+id/et_tablet_no" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="@+id/sp_table_no"
+        app:layout_constraintStart_toStartOf="@+id/sp_table_no"
+        app:layout_constraintTop_toBottomOf="@+id/sp_table_no" />
+</android.support.constraint.ConstraintLayout>

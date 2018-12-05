@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.lenovo.eats.Activities.TDBReportingMainActivity">
+
+        <TextView
+            android:id="@+id/mainHeadingTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:text="Reporting Module"
+            android:textSize="@dimen/mainHeadingSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/dailyReportButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Daily Report"
+            app:layout_constraintEnd_toEndOf="@+id/weeklyReportButton"
+            app:layout_constraintStart_toStartOf="@+id/weeklyReportButton"
+            app:layout_constraintTop_toBottomOf="@+id/mainHeadingTv" />
+
+        <Button
+            android:id="@+id/weeklyReportButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginTop="8dp"
+            android:text="Weekly Report"
+            app:layout_constraintEnd_toEndOf="@+id/monthlyReportButton"
+            app:layout_constraintStart_toStartOf="@+id/monthlyReportButton"
+            app:layout_constraintTop_toBottomOf="@+id/dailyReportButton" />
+
+        <Button
+            android:id="@+id/monthlyReportButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginTop="8dp"
+            android:text="Monthly  Report"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weeklyReportButton" />
+
+        <Button
+            android:id="@+id/biAnnualReportButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginTop="8dp"
+            android:text="Bi-Annual  Report"
+            app:layout_constraintEnd_toEndOf="@+id/annualReportButton"
+            app:layout_constraintStart_toStartOf="@+id/annualReportButton"
+            app:layout_constraintTop_toBottomOf="@+id/monthlyReportButton" />
+
+        <Button
+            android:id="@+id/annualReportButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Annual  Report"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/biAnnualReportButton" />
+
+    </android.support.constraint.ConstraintLayout>

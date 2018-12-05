@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lenovo.eats.Activities.TrioListMenuItem">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/imageView_order"
+            android:layout_width="89dp"
+            android:layout_height="74dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="22dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="orderItemimage"
+            android:cropToPadding="true" />
+
+        <TextView
+            android:id="@+id/textView_orderitemname"
+            android:layout_width="206dp"
+            android:layout_height="42dp"
+            android:layout_alignLeft="@+id/quantity"
+            android:layout_alignStart="@+id/quantity"
+            android:layout_alignTop="@+id/imageView_order"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="38dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/imageView_order"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="194dp"
+            android:layout_marginRight="194dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/specialins"
+            android:layout_width="146dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/imageView_order"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="1dp"
+            android:layout_marginEnd="32dp" />
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.example.lenovo.eats.Activities.PiedPiperMainMenuActivity">
+
+        <Button
+            android:id="@+id/btn_add_inventory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:text="Add inventory"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="Admin Module"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_add_menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:layout_marginTop="16dp"
+            android:text="ADD MENU ITEM"
+            app:layout_constraintEnd_toEndOf="@+id/btn_add_inventory"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_add_inventory"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_inventory" />
+
+        <Button
+            android:id="@+id/btn_add_employee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="ADD EMPLOYEE"
+            app:layout_constraintEnd_toEndOf="@+id/btn_add_menu_item"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btn_add_menu_item"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_menu_item" />
+
+        <Button
+            android:id="@+id/btn_add_dining_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="ADD DINING TABLE"
+            app:layout_constraintEnd_toEndOf="@+id/btn_add_employee"
+            app:layout_constraintStart_toStartOf="@+id/btn_add_employee"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_employee" />
+
+        <Button
+            android:id="@+id/btn_assign_tablet_to_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="ASSIGN TABLET TO TABLE"
+            app:layout_constraintEnd_toEndOf="@+id/btn_add_dining_table"
+            app:layout_constraintStart_toStartOf="@+id/btn_add_dining_table"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_dining_table" />
+
+        <Button
+            android:id="@+id/btn_add_tablet"
+            android:layout_width="119dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:text="Add tablet"
+            app:layout_constraintEnd_toEndOf="@+id/btn_assign_tablet_to_table"
+            app:layout_constraintHorizontal_bias="0.457"
+            app:layout_constraintStart_toStartOf="@+id/btn_assign_tablet_to_table"
+            app:layout_constraintTop_toBottomOf="@+id/btn_assign_tablet_to_table" />
+
+        <Button
+            android:id="@+id/viewReportsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="View Reports"
+            app:layout_constraintEnd_toEndOf="@+id/btn_add_tablet"
+            app:layout_constraintStart_toStartOf="@+id/btn_add_tablet"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_tablet" />
+
+</android.support.constraint.ConstraintLayout>

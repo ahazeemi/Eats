@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/el_messiri_bold</item>
         <item>@font/montserrat</item>
         <item>@font/open_sans</item>
         <item>@font/open_sans_light</item>

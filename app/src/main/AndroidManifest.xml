@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lenovo.eats">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,11 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.OrderItems" />
 
@@ -24,9 +20,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activities.Bill_FeedbackActivity"></activity>
-        <activity android:name=".Activities.Bill_ShowOrderActivity"/>
-        <activity android:name=".Activities.Bill_SplitBillActivity"/>
 
         <activity android:name=".Activities.ChefComplaiantDetail"></activity>
         <activity android:name=".Activities.MenuItemComplaintDetail"
@@ -34,6 +27,55 @@
             >
 
         </activity>
+        <activity android:name=".Activities.TrioMenuDisplayActivity"></activity>
+        <activity android:name=".Activities.TrioOrderConfirmationActivity"></activity>
+        <activity android:name=".Activities.TrioOrderManagementActivity"></activity>
+        <activity android:name=".Activities.TrioListMenuItem"></activity>
+        <activity android:name=".Activities.TrioListOrderItem"></activity>
+        <activity android:name=".Activities.TrioListView"></activity>
+        <activity android:name=".Activities.TrioListViewOrder"></activity>
+        <activity android:name=".Activities.TrioWaitingTimeActivity"></activity>
+        <activity android:name=".Activities.Bill_FeedbackActivity" />
+        <activity android:name=".Activities.Bill_ShowOrderActivity" />
+        <activity android:name=".Activities.Bill_SplitBillActivity" />
+        <activity android:name=".Activities.HallLoginActivity" />
+        <activity android:name=".Activities.HallassignTablesWaiters" />
+        <activity android:name=".Activities.HallassignTablesTablets" />
+        <activity android:name=".Activities.hallManagerOrderBill" />
+        <activity android:name=".Activities.DineinChefInterface" />
+
+        <!--Third Degree Burn-->
+        <activity android:name="com.example.lenovo.eats.Activities.TDBReportingMainActivity"/>
+        <activity android:name="com.example.lenovo.eats.Activities.TDBDailyReportActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.TDBMonthlyReportActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.TDBWeeklyReportActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.TDBAnnualReportActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.TDBBiAnnualReportActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.TDBReportSelectionActivity"></activity>
+
+        <!--PiedPiper-->
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperMainActivity"/>
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperEmployeeLoginActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperMainMenuActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperAddInventoryActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperAddMenuItemActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperAddEmployeeActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperAddDiningTableActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperAssignTabletToTableActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperPurchaseAnItemActivity" />
+        <activity android:name="com.example.lenovo.eats.Activities.PiedPiperAddTabletActivity"></activity>
+
+        <!--Where's The Food-->
+        <activity android:name="com.example.lenovo.eats.Activities.WTFMainActivity"/>
+        <activity android:name=".Activities.EatsMainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

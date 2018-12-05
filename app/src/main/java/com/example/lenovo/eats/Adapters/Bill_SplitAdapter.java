@@ -27,7 +27,7 @@ public class Bill_SplitAdapter extends RecyclerView.Adapter<Bill_SplitViewHolder
     @NonNull
     @Override
     public Bill_SplitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.bill_split_order_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.split_order_view, parent, false);
         return new Bill_SplitViewHolder(v, new SplitAdapterListener(){
             @Override
             public void addOnClick(View v, int position) {

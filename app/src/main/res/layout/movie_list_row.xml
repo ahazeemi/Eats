@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/corners"
+
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/colorNewTitle"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+
+
+        android:textAllCaps="false"
+        android:text=" View Order Details "
+        android:textColor="@color/colorAccent"
+        android:textStyle="normal"
+        android:background="@drawable/cornersanswer"
+
+
+
+
+        />
+
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/problemColor"
+
+        android:textSize="15dp"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/problemColor"
+        android:text="Bill : "
+        android:textSize="15dp"
+        android:layout_below="@id/genre"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/problemColor"
+        android:text="Status : "
+        android:textSize="15dp"
+        android:layout_below="@id/bill"
+        android:layout_marginBottom="10dp"/>
+
+
+    <Button
+        android:id="@+id/special"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/details"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/cornersanswer"
+        android:text="Mini Order"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textStyle="normal"
+
+
+        />
+
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/date" />
+
+    <Button
+        android:id="@+id/Answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bill Paid"
+        android:textColor="@color/colorAccent"
+        android:textStyle="normal"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/status"
+        android:background="@drawable/cornersanswer"
+        android:layout_marginTop="5dp"
+
+        />
+
+
+
+    />
+
+</RelativeLayout>
+
+
+
+<!--android:background="?android:attr/selectableItemBackground"  -->

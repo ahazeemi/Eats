@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Bill_FeedbackActivity"
+    tools:context=".Activities.FeedbackActivity"
     android:orientation="vertical">
 
         <LinearLayout
@@ -76,10 +76,11 @@
                 android:layout_gravity="center_vertical"/>
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/rating_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                android:numStars="5"
+                android:stepSize="1.0"
                 android:layout_margin="5dp"/>
 
         </LinearLayout>

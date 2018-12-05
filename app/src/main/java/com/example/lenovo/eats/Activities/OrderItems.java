@@ -116,11 +116,13 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuItemView menuItem = dataSnapshot.getValue(MenuItemView.class);
-                menuItem.setMenuItemId(dataSnapshot.getKey());
-                menuItem.setQuantityOrdered(quantity);
-                menuItems.add(menuItem);
-                adapter.notifyDataSetChanged();
-                progressBar.setVisibility(View.INVISIBLE);
+                if(menuItem!=null) {
+                    menuItem.setMenuItemId(dataSnapshot.getKey());
+                    menuItem.setQuantityOrdered(quantity);
+                    menuItems.add(menuItem);
+                    adapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.INVISIBLE);
+                }
 
             }
 
@@ -204,6 +206,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
                 temp.setMenuItemId(key);
                 int index = menuItems.indexOf(temp);
                 menuItems.remove(index);
+                adapter.notifyDataSetChanged();
                 if (menuItems.size() == 0) {
                     Toast.makeText(this, "All Items Reordered", Toast.LENGTH_SHORT).show();
                     finish();

@@ -42,7 +42,7 @@ public class Bill_OrdersAdapter extends RecyclerView.Adapter<Bill_OrdersViewhold
     @NonNull
     @Override
     public Bill_OrdersViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.bill_orders_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_view, parent, false);
         return new Bill_OrdersViewholder(v, new OrdersAdapterListener(){
             @Override
             public void onSplitClick(View v, int position) {

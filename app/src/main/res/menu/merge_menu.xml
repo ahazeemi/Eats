@@ -4,7 +4,7 @@
 
     <item android:id="@+id/cancelMerge"
         app:showAsAction="ifRoom"
-        android:title="@string/cancel"
+        android:title="Cancel"
         android:visible="false"/>
 
     <item android:id="@+id/doneMerge"

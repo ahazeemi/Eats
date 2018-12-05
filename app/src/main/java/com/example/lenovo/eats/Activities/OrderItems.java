@@ -18,6 +18,7 @@ import com.example.lenovo.eats.ClassModel.Ingredient;
 import com.example.lenovo.eats.ClassModel.MenuItem;
 import com.example.lenovo.eats.ClassModel.MenuItemView;
 import com.example.lenovo.eats.ClassModel.MenuItemComplaint;
+import com.example.lenovo.eats.ClassModel.OrderMenuItem;
 import com.example.lenovo.eats.Interfaces.OnListFragmentInteractionListener;
 import com.example.lenovo.eats.R;
 import com.google.firebase.database.ChildEventListener;
@@ -81,7 +82,7 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                FetchMenuItem(dataSnapshot.getKey(),dataSnapshot.getValue(Integer.class));
+                FetchMenuItem(dataSnapshot.getKey(),dataSnapshot.getValue(OrderMenuItem.class));
                 //FetchMenuItem(dataSnapshot.getKey(),dataSnapshot.getValue(Integer.class));
             }
 
@@ -107,15 +108,16 @@ public class OrderItems extends AppCompatActivity implements OnListFragmentInter
         });
     }
 
-    void FetchMenuItem(String key, final Integer quantity)
+    void FetchMenuItem(String key, final OrderMenuItem item)
     {
+        final int quantity = item.getQuantity();
         DatabaseReference databaseReference=firebaseDatabase.getReference("MenuItem");
         databaseReference.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuItemView menuItem = dataSnapshot.getValue(MenuItemView.class);
                 menuItem.setMenuItemId(dataSnapshot.getKey());
-                //menuItem.setQuantityOrdered(quantity);
+                menuItem.setQuantityOrdered(quantity);
                 menuItems.add(menuItem);
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.INVISIBLE);

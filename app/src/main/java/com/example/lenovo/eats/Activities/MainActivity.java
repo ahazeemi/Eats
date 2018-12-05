@@ -18,14 +18,14 @@ public class MainActivity extends AppCompatActivity {
     public void onComplaintClick(View view)
     {
         Intent intent = new Intent(this,OrderItems.class);
-        intent.putExtra("orderId","orderid");
+        intent.putExtra("orderId","1");
         intent.putExtra("type","customer");
         startActivity(intent);
     }
     public void chefComplaintClick(View view)
     {
         Intent intent = new Intent(this,OrderItems.class);
-        intent.putExtra("orderId","orderid");
+        intent.putExtra("orderId","1");
         intent.putExtra("type","chef");
         startActivity(intent);
     }
